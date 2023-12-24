@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      validCheckSum:
+        - ANY
+      id: 20231216_1254
+      author: b.yakovenko
+      preConditions:
+        - onFail: CONTINUE
+        - not:
+            - tableExists:
+                tableName: cities
+      changes:
+        - createTable:
+            tableName: cities
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_countries
+              - column:
+                  name: name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_cities_name
+              - column:
+                  name: logo
+                  type: varchar(32)
+              - column:
+                  name: country_id
+                  type: bigint

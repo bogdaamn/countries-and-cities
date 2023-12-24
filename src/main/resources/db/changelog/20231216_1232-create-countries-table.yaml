@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      validCheckSum:
+        - ANY
+      id: 20231216_1232
+      author: b.yakovenko
+      preConditions:
+        - onFail: CONTINUE
+        - not:
+            - tableExists:
+                tableName: countries
+      changes:
+        - createTable:
+            tableName: countries
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_countries
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false

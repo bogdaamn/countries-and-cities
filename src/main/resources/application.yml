@@ -1,0 +1,33 @@
+server:
+  port: 10100
+  servlet:
+    context-path: /rest/api/world-manager
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  sql:
+    init:
+      encoding: UTF-8
+
+cors:
+  allowed-methods: GET,POST,PUT
+  max-age: PT1h
+
+api:
+  version: v1
+
+app:
+  logo-directory-path: src/main/resources/logos/
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: application-local.yml

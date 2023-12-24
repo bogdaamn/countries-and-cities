@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      validCheckSum:
+        - ANY
+      id: 20231217_1700
+      author: b.yakovenko
+      preConditions:
+        - onFail: CONTINUE
+        - tableExists:
+            tableName: countries
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from countries
+      changes:
+        - loadData:
+            file: data/countries.csv
+            tableName: countries

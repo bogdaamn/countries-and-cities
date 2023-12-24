@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/20231216_1232-create-countries-table.yaml
+  - include:
+      file: db/changelog/20231216_1254-create-cities-table.yaml
+  - include:
+      file: db/changelog/20231217_1700-add-data-for-table-countries.yaml
+  - include:
+      file: db/changelog/20231217_1725-add-data-to-cities-table.yaml

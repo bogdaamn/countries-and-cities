@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      validCheckSum:
+        - ANY
+      id: 20231217_1725
+      author: b.yakovenko
+      preConditions:
+        - onFail: CONTINUE
+        - tableExists:
+            tableName: cities
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from cities
+      changes:
+        - loadData:
+            file: data/cities.csv
+            tableName: cities
