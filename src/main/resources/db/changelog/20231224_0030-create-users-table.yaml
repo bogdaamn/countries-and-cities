@@ -22,7 +22,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_users
               - column:
-                  name: name
+                  name: login
                   type: varchar(64)
                   constraints:
                     nullable: false

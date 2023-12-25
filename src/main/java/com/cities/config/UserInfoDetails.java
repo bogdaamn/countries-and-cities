@@ -11,12 +11,12 @@ import java.util.List;
 public class UserInfoDetails implements UserDetails {
 
     private static final String ROLE_PREFIX = "ROLE_";
-    private String name;
+    private String login;
     private String password;
     private List<GrantedAuthority> roles;
 
-    public UserInfoDetails(String name, String password, List<GrantedAuthority> roles) {
-        this.name = name;
+    public UserInfoDetails(String login, String password, List<GrantedAuthority> roles) {
+        this.login = login;
         this.password = password;
         this.roles = roles;
     }
@@ -36,7 +36,7 @@ public class UserInfoDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.name;
+        return this.login;
     }
 
     @Override
