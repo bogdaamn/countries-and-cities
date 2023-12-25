@@ -1,0 +1,9 @@
+
+C
+java:S1452*"&Remove usage of generic wildcard type.(“š¡â8Õ¬™îÉ1
+H
+java:S14520"&Remove usage of generic wildcard type.(µ¿ÏŞøÿÿÿÿ8¤İ¥îÉ1
+a
+java:S1128"?Remove this unused import 'org.springframework.http.MediaType'.(úŸİ¯şÿÿÿÿ8İÉ¼îÉ1
+n
+java:S1128"LRemove this unused import 'org.springframework.web.multipart.MultipartFile'.(ôŸœÿÿÿÿÿ8İÉ¼îÉ1

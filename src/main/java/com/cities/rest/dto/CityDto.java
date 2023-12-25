@@ -1,18 +1,24 @@
 package com.cities.rest.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Objects;
 
 public class CityDto {
 
     private Long id;
     private String name;
-    private MultipartFile file;
+    private String fileUrl;
 
     public CityDto(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 
     public Long getId() {

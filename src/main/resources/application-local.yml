@@ -1,5 +1,10 @@
 spring:
+  security:
+    user:
+      name: dev
+      password: pass
   datasource:
     url: jdbc:mysql://localhost:3308/countries
     username: user
     password: password
+

@@ -4,6 +4,9 @@ server:
     context-path: /rest/api/world-manager
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
   jpa:
     show-sql: true
     properties:

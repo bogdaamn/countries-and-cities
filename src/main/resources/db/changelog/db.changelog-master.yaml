@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/20231217_1700-add-data-for-table-countries.yaml
   - include:
       file: db/changelog/20231217_1725-add-data-to-cities-table.yaml
+  - include:
+      file: db/changelog/20231224_0030-create-users-table.yaml

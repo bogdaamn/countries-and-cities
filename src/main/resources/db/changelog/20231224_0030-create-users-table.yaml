@@ -2,16 +2,16 @@ databaseChangeLog:
   - changeSet:
       validCheckSum:
         - ANY
-      id: 20231216_1232
+      id: 20231224_0030
       author: b.yakovenko
       preConditions:
         - onFail: CONTINUE
         - not:
             - tableExists:
-                tableName: countries
+                tableName: users
       changes:
         - createTable:
-            tableName: countries
+            tableName: users
             columns:
               - column:
                   name: id
@@ -20,11 +20,20 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_countries
+                    primaryKeyName: pk_users
               - column:
                   name: name
                   type: varchar(64)
                   constraints:
                     nullable: false
                     unique: true
-                    uniqueConstraintName: uk_countries_name
+              - column:
+                  name: password
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
