@@ -1,45 +1,32 @@
 package com.cities.service;
 
-import com.cities.exception.InvalidPasswordException;
-import com.cities.exception.UserNotFoundException;
-import com.cities.mapping.UserDtoMapper;
-import com.cities.persistance.entity.UserEntity;
-import com.cities.persistance.repository.UserRepository;
+import com.cities.config.jwt.JwtTokenUtil;
 import com.cities.rest.dto.CredentialsDto;
-import com.cities.rest.dto.UserDto;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.cities.rest.dto.JwtResponseDto;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-
-import jakarta.transaction.Transactional;
-import java.nio.CharBuffer;
 
 @Service
 public class AuthenticationService {
 
-    private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
-    private final UserDtoMapper userMapper;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final UserDetailsService userDetailsService;
+    private final AuthenticationManager authenticationManager;
 
-    public AuthenticationService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserDtoMapper userMapper) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
+    public AuthenticationService(JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService, AuthenticationManager authenticationManager) {
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsService = userDetailsService;
+        this.authenticationManager = authenticationManager;
     }
 
-    @Transactional
-    public UserDto authenticate(CredentialsDto credentialsDto) {
-        UserEntity user = userRepository.findByLogin(credentialsDto.getLogin())
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+    public JwtResponseDto signIn(CredentialsDto credentialsDto) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(credentialsDto.getLogin(), credentialsDto.getPassword()));
 
-        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) {
-            return userMapper.map(user);
-        }
-        throw new InvalidPasswordException("Invalid password");
-    }
-
-    public UserDto findByLogin(String login) {
-        UserEntity user = userRepository.findByLogin(login)
-                .orElseThrow(() -> new UserNotFoundException("Login not found"));
-        return userMapper.map(user);
+        var userDetails = userDetailsService.loadUserByUsername(credentialsDto.getLogin());
+        var jwt = jwtTokenUtil.generateToken(userDetails);
+        return new JwtResponseDto(jwt);
     }
 }

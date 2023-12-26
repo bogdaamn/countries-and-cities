@@ -3,12 +3,12 @@ package com.cities.rest.dto;
 public class CredentialsDto {
 
     private String login;
-    private char[] password;
+    private String password;
 
     public CredentialsDto() {
     }
 
-    public CredentialsDto(String login, char[] password) {
+    public CredentialsDto(String login, String password) {
         this.login = login;
         this.password = password;
     }
@@ -21,11 +21,11 @@ public class CredentialsDto {
         this.login = login;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
